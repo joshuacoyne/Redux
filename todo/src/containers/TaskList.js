@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addNewTask } from './../actions/addNewTask.js';
-
+let input;
 class TaskList extends Component {
 
-    renderTaskList() {
-        return 
-            this.props.taskList.map(item => {
-                return (
-                    <div>{item.task}</div>
-                )
-            })
-        
-    }
+
+    
 
     render() {
         return(
             <div>
-            {this.renderTaskList()}    
-            <form>
-                <input/>
-                <button onClick={this.props.addNewTask}>Add New Task</button>
+            {this.props.taskList.map(item => {
+                return (
+                    <div>{`Task: ${item.task}`}</div>
+                )
+            })}    
+            <form onSubmit={(event) =>{
+                 event.preventDefault();
+                 this.props.addNewTask(input.value)}}>
+                <input ref={node => input = node}/>
+                <button type='submmit' >Add New Task</button>
             </form>        
             </div>
         )        
@@ -30,7 +29,8 @@ class TaskList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        taskList: state.taskList
+        taskList: state
+        
     }
 }
 

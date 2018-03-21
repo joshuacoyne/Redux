@@ -1,10 +1,10 @@
-export default (taskList = [{task: 'test'}], action) => {
+export default (taskList = [{task: 'test'}, {task: 'test2'}], action) => {
     switch (action.type){
         case 'NEWTASK':
             return [
                 ...taskList,
                 {
-                    task: action.newTask
+                    task: action.task
                 }
             ];
         default:
